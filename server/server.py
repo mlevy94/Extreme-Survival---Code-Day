@@ -1,21 +1,25 @@
 ##
 # Class for managing clients connected to the game
 
-from client.client import Client
-from PyQt5.QtCore import pyqtSignal as signal
 import socket
 import threading
 
+from PyQt5.QtCore import pyqtSignal as signal, QObject
+
+from server.client import Client
+
+
 ##
 #  Basic class for accepting clients and passing along their information
-class Server():
+class Server(QObject):
 
     address = None
     port = 5000
 
     newCliSig = signal(Client)
 
-    def __init__(self):
+    def __init__(self, *args, **kargs):
+      super().__init__(*args, **kargs)
       self.socket = socket.socket()
       self.address = socket.gethostbyname(socket.gethostname())
       self.socket.bind(self.address)
