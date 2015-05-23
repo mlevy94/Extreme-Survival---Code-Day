@@ -13,10 +13,10 @@ class Event:
         self.dtime = dtime
 
     def present(self, player):
+        # Use the option_picked in run to do specific things
         self.option_picked = player.present(self.options)
 
     def run(self, game):
-        # TODO
         # Subclasses should extend this for specific functionality
         self.prob = self.base_prob
         game.time += self.dtime
