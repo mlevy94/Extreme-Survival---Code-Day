@@ -2,6 +2,25 @@ from server.player import PlayerType
 
 __author__ = 'Wes'
 
+COMPUTERS = ['computer', 'laptop', 'desktop']
+GET = ['get', 'grab']
+NOTHING = ['sit', 'do nothing', 'no action']
+
+class Option:
+    all_required = [[]]
+    str = ""
+
+    def __init__(self, all_required, str):
+        self.all_required = all_required
+
+    def check(self, str):
+        acc = 0
+        for required in self.all_required:
+            for required_str in required:
+                if required_str in str:
+                    acc += 1
+        return acc >= len(self.all_required)
+
 class Event:
     prob = 0
     base_prob = 0
@@ -9,7 +28,7 @@ class Event:
     display = ""
     end_display = ""
     options = []
-    option_picked = None
+    option_index = -1
     player_type = PlayerType.NORMAL
 
     def __init__(self, display, end_display, options, baseprob = 0, dtime = 0):
@@ -22,9 +41,23 @@ class Event:
     def present(self, game, player):
         # Use the option_picked in run to do specific things
         if self.check(player):
-            self.option_picked = player.present(self.options)
-            self.run(game, player)
+            str = player.present(map(lambda option: option.str, self.options))
+            self.option_picked(str, game, player)
 
+    def get_input(self, game, player):
+        if self.check(player):
+            player.print(self.display)
+            self.option_picked(player.prompt("Enter a response to event"), game, player)
+
+
+    def option_picked(self, str, game, player):
+        for option in self.options:
+            if option.check(str):
+                self.option_index = self.options.index(option)
+            if self.option_index == -1:
+                self.present(game, player)
+            else:
+                self.run(game, player)
 
     def run(self, game, player):
         # Subclasses should extend this for specific functionality
@@ -38,11 +71,11 @@ class Event:
 
 class AntigravityEvent(Event):
     def __init__(self):
-        super().__init__("You have imported antigravity!", "", ["Try To Grab Computer", "Sit there"], 5)
+        super().__init__("You have imported antigravity!", "", [Option([GET, COMPUTERS], "Grab your computer"), Option([NOTHING], "Do nothing")], 5)
 
     def run(self, game, player):
-        if self.option_picked == "Try To Grab Computer":
-            self.end_display = """You grabbed your computer and are now working on the cieling.
+        if self.option_picked == 0:
+            self.end_display = """You grabbed your computer and are now working on the ceiling.
             Your productivity has increased. You gain 1 hour"""
             self.dtime = 60
         else:
