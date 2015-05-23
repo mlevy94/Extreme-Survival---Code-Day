@@ -1,5 +1,3 @@
-from server.event import Event
-
 __author__ = 'Wes'
 class Game:
     time = 1,440
