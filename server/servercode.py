@@ -22,7 +22,7 @@ class Server(QObject):
       super().__init__(*args, **kargs)
       self.socket = socket.socket()
       self.address = socket.gethostbyname(socket.gethostname())
-      self.socket.bind(self.address)
+      self.socket.bind((self.address, self.port))
       self.socket.listen(5)
       self.listening = False
       acceptThread = threading.Thread(target=self.acceptClient, daemon=True)
@@ -33,7 +33,7 @@ class Server(QObject):
     def acceptClient(self):
       self.listening = True
       print("Now Listening to clients on IP: {} port: {}".format(self.address, self.port))
-      while not self.listening:
+      while self.listening:
         cliSock, cliAddr = self.socket.accept()
         print("Client {} has connected to the server.".format(cliAddr))
         self.newCliSig.emit(Client(cliSock))
