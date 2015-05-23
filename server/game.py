@@ -1,7 +1,10 @@
+from server.event import Event
+
 __author__ = 'Wes'
 class Game:
     time = 1,440
     players = []
+
     def __init__(self, players):
         self.players = players
 
@@ -9,5 +12,5 @@ class Game:
         self.time += amount
 
     def turn(self):
-        # TODO
-        return
+        for player in self.players:
+            player.turn(self)
