@@ -5,7 +5,6 @@ import socket
 import threading
 
 from PyQt5.QtCore import pyqtSignal as signal, QObject
-
 from server.client import Client
 
 
@@ -33,7 +32,14 @@ class Server(QObject):
     def acceptClient(self):
       self.listening = True
       print("Now Listening to clients on IP: {} port: {}".format(self.address, self.port))
-      while not self.listening:
+      while self.listening:
         cliSock, cliAddr = self.socket.accept()
         print("Client {} has connected to the server.".format(cliAddr))
         self.newCliSig.emit(Client(cliSock))
+
+if __name__ == "__main__":
+  server = Server()
+  while True:
+    data = input()
+    if data == "stop":
+      break
