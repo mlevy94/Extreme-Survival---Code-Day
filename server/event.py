@@ -1,3 +1,4 @@
+import random
 from server.playertype import PlayerType
 
 __author__ = 'Wes'
@@ -13,8 +14,8 @@ DRINK = ['drink']
 ENERGY_DRINK = ['energy', 'redbull', 'red bull', 'monster', 'coffee']
 SEARCH = ['search', 'download', 'google', 'online', 'find API']
 GOOD =  ['q','z','m','p','0','2']
-BAD = !GOOD
 INVESTIGATE = ['check', 'investigate', 'find']
+HIDE = ['hide']
 
 class Option:
 
@@ -145,7 +146,7 @@ class NewMember(Event):
             if random.uniform(0, 1000) < 300:
                 self.end_display = """The new member is a genius. He saves two hours"""
                 self.dtime = 120
-            else if random.uniform(0, 1000) < 700:
+            elif random.uniform(0, 1000) < 700:
                 self.end_display = """The new guy is good. One hour is saved"""
                 self.dtime = 60
             else:
@@ -159,19 +160,19 @@ class NewMember(Event):
 class ForgotPassword(Event):
     def __init__(self):
         super().__init__("""As you rouse your computer from its deep slumber, it presents you with a familiar screen:
-            a red background, with some text informing you that your device is locked. You move your cursor over the familiar dialogue box, and…""", "", [Option([GOOD], "Success"), Option([BAD], "Failure")], 5)
+            a red background, with some text informing you that your device is locked. You move your cursor over the familiar dialogue box, andï¿½""", "", [Option([GOOD], "Success")], 5)
 
     def run(self, game, player):
         if self.option_picked == 0:
             self.end_display = """You log in...Moving on to more important things"""
             #break
         else:
-            self.end_display = """Your computer thinks for a moment then responds with a large “Password Incorrect” message.
-            Huh? That’s odd, you know your own password, and you’ve used the same one since high school…
-            You should probably have changed it since then but you know, I’m sorry, knew your password.
+            self.end_display = """Your computer thinks for a moment then responds with a large ï¿½Password Incorrectï¿½ message.
+            Huh? Thatï¿½s odd, you know your own password, and youï¿½ve used the same one since high schoolï¿½
+            You should probably have changed it since then but you know, Iï¿½m sorry, knew your password.
             Well not much left to do but start guessing."""
             self.dtime = -15
-            #repeat request for password
+            # TODO repeat request for password
         super().run(game, player)
 
 class Shaking(Event):
@@ -182,25 +183,25 @@ class Shaking(Event):
         if self.option_picked == 0:
             if random.uniform(1,1000)< 400:
                 def __init__(self):
-                    super().__init__("""A Pterodactyl breaks in through the roof""", "", [Option([Nothing], "Ignore"), Option([HIDE], "Hide")], 5)
-            else if random.uniform(1,1000) < 400:
+                    super().__init__("""A Pterodactyl breaks in through the roof""", "", [Option([NOTHING], "Ignore"), Option([HIDE], "Hide")], 5)
+            elif random.uniform(1,1000) < 400:
                 self.end_display = """An earthquake causes the roof to fall. Lose 1 hour finding another location to code"""
                 self.dtime = -60
             else:
                 self.end_display = """It was the constuction work, continue to code."""
-        else if self.option_picked == 1;
+        elif self.option_picked == 1:
             if random.uniform(1,1000)< 400:
-                elf.end_display = #insert Scenario
+                self.end_display = None # TODO insert Scenario
                 self.dtime = -30
             else:
-                elf.end_display = #insert scenario
+                self.end_display = None # TODO insert scenario
         else:
             if random.uniform(1,1000)< 400:
-                elf.end_display = """Wasted half hour hiding from the sound of the construction work.
+                self.end_display = """Wasted half hour hiding from the sound of the construction work.
                 Assured of safety, you continue work"""
                 self.dtime = -30
             else:
-                elf.end_display = """Your preparedness for the earthquake saved you valuable time. Continue to code"""
+                self.end_display = """Your preparedness for the earthquake saved you valuable time. Continue to code"""
 
 
 
