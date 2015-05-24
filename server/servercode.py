@@ -3,7 +3,7 @@
 
 import socket
 import threading
-
+import time
 from PyQt5.QtCore import pyqtSignal as signal, QObject
 from server.client import Client
 
@@ -15,7 +15,7 @@ class Server(QObject):
     address = None
     port = 5000
 
-    newCliSig = signal(Client)
+    newCliSig = signal(int)
 
     def __init__(self, *args, **kargs):
       super().__init__(*args, **kargs)
@@ -24,6 +24,7 @@ class Server(QObject):
       self.socket.bind((self.address, self.port))
       self.socket.listen(5)
       self.listening = False
+      self.clients = []
       acceptThread = threading.Thread(target=self.acceptClient, daemon=True)
       acceptThread.start()
 
@@ -34,12 +35,34 @@ class Server(QObject):
       print("Now Listening to clients on IP: {} port: {}".format(self.address, self.port))
       while self.listening:
         cliSock, cliAddr = self.socket.accept()
-        print("Client {} has connected to the server.".format(cliAddr))
-        self.newCliSig.emit(Client(cliSock))
+        print("Client {} has connected to the server.".format(cliAddr[0]))
+        self.clients.append(Client(cliSock))
+        self.newCliSig.emit(len(self.clients))
 
 if __name__ == "__main__":
   server = Server()
+  client = None
+  def onNewCliSig():
+    pass
+  server.newCliSig.connect(onNewCliSig)
+  while len(server.clients) == 0:
+    time.sleep(1)
+  client = server.clients[0]
+  def echo():
+    while True:
+      try:
+        cliData = client.read()
+      except socket.error:
+        break
+      if cliData != "":
+        client.write(cliData)
+  echoThread = threading.Thread(target=echo, name="Echo Thread", daemon=True)
+  echoThread.start()
   while True:
     data = input()
     if data == "stop":
       break
+    if data == "readbuff":
+      print("readbuffer:", client.readBuff)
+    if data == "writebuff":
+      print("writebuffer:", client.writeBuff)

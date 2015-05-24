@@ -33,31 +33,46 @@ class Client(QObject):
       raise Exception("write received a bad data type")
 
   def _read(self):
-    # TODO add signal so this doesn't keep reading when client disconnects
     self.readSock = True
     while self.readSock:
       try:
         data = self.socket.recv(4096)
-      except socket.error:
-        self.close()
       except socket.timeout:
         pass
-      if data != b'':
-        self.readBuff += data.encode()
+      except socket.error:
+        print("quitting")
+        self._close()
+        break
+      else:
+        if data != b'':
+          self.readBuff += data.decode()
+
 
   def _write(self):
     self.writeSock = True
     while self.writeSock:
       if self.writeBuff != "":
         data = self.writeBuff
-        self.socket.sendAll(data.encode())
+        self.socket.sendall(data.encode())
         self.writeBuff = self.writeBuff.replace(data, "")
 
-  def close(self):
+  def _close(self):
     self.writeSock = False
     self.writeThread.join()
-    self.readThread.join()
-    self.socket.shutdown()
+    try:
+      pass
+      #self.readThread.join()
+    except RuntimeError:
+      pass # close called by read thread losing connection
+    try:
+      self.clientDisconnected.emit()
+    except AttributeError:
+      pass # no one connected to this signal
+
+  def close(self):
+    self.socket.shutdown(socket.SHUT_RDWR)
     self.socket.close()
+    self._close()
+
 
 
