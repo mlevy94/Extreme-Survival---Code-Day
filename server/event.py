@@ -25,6 +25,7 @@ class Option:
             for required_str in required:
                 if required_str in str:
                     acc += 1
+                    continue
         return acc >= len(self.all_required)
 
 class Event:
@@ -88,7 +89,7 @@ class AntigravityEvent(Event):
 
 class TiredEvent(Event):
     def __init__(self):
-        super().__init__("Feeling Tired", "", [Option([REST], "Rest"), Option([NOTHING], "Ignore"), Option([ENERGY, DRINK, REDBULL, COFFEE], "Have Energy Drink")], 5)
+        super().__init__("Feeling Tired", "", [Option([REST], "Rest"), Option([NOTHING], "Ignore"), Option([DRINK, ENERGY_DRINK], "Have Energy Drink")], 5)
 
     def run(self, game, player):
         if self.option_picked == 0:
