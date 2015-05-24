@@ -12,7 +12,7 @@ class Player:
         self.client = client
         self.type = type
         self.events = [AntigravityEvent(), TiredEvent(), NewCodeNeeded(), NewMember(), ForgotPassword(), Shaking()]
-        self.drate = 0
+        self.drate = 1
 
     def present(self, options):
         for option in options:
