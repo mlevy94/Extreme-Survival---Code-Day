@@ -1,20 +1,29 @@
+from server.event import AntigravityEvent
+from server.playertype import PlayerType
+
 __author__ = 'Wes'
 
-from server.event import *
-from enum import Enum
 import random
 
-class Player:
-    name = ""
-    type = PlayerType.NORMAL
-    events = [AntigravityEvent()]
-    client = None
+NORMAL = [AntigravityEvent()]
+FRONTEND = []
+BACKEND = []
+DESIGNER = []
+MASTER = NORMAL + FRONTEND + BACKEND + DESIGNER
 
-    def __init__(self, name, client, type = PlayerType.NORMAL, events = []):
+class Player:
+    def __init__(self, name, client, type = PlayerType.NORMAL):
         self.name = name
         self.client = client
         self.type = type
-        self.events = events
+        if type == PlayerType.NORMAL:
+            self.events = NORMAL
+        elif type == PlayerType.FRONTEND:
+            self.events = FRONTEND
+        elif type == PlayerType.BACKEND:
+            self.events = BACKEND
+        elif type == PlayerType.DESIGNER:
+            self.events = DESIGNER
 
     def present(self, options):
         for option in options:
@@ -33,9 +42,3 @@ class Player:
     def print(self, to_print):
         # TODO send a message to the client to print the message
         print("Sent this to",  self.name, "(" + self.client + ")" + ":", to_print)
-
-class PlayerType(Enum):
-    NORMAL = 1
-    FRONTEND = 2
-    BACKEND = 3
-    DESIGNER = 4

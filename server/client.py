@@ -33,6 +33,7 @@ class Client(QObject):
       raise Exception("write received a bad data type")
 
   def _read(self):
+    # TODO add signal so this doesn't keep reading when client disconnects
     self.readSock = True
     while self.readSock:
       try:
