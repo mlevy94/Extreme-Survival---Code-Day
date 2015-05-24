@@ -86,19 +86,19 @@ class AntigravityEvent(Event):
     def __init__(self):
         super().__init__("""Type type type, click click click. The keys pound down on the keyboard as you slowly whittle away the hours masterfully crafting code.
         Then into your mind pops a rumor you heard once, that if you told the interpreter to input antigravity that you would be taken to a comic site.
-        Bored and at wits end, you decide that you deserve a little break. You type with a renewed vigor, placing in “input antigravity”.
-        A loud humming fills the room, as you suddenly feel like your falling… up?""", "", [Option([GET, COMPUTERS], "Grab your computer"), Option([NOTHING], "Do nothing")])
+        Bored and at wits end, you decide that you deserve a little break. You type with a renewed vigor, placing in 'input antigravity.
+        A loud humming fills the room, as you suddenly feel like your falling' up?""", "", [Option([GET, COMPUTERS], "Grab your computer"), Option([NOTHING], "Do nothing")])
 
     def run(self, game, player):
         if self.option_picked == 0:
             self.end_display = """You grab your computer as you start to slowly float away towards the ceiling.
-            You just float on, it’s alright already, because you’ll just float on the ceiling.
+            You just float on, it's alright already, because you'll just float on the ceiling.
             A change of perspective is all you needed, enjoy your time up here.
             Your productivity has increased. You gain 1 hour"""
             self.dtime = 60
         else:
             if random.uniform(1,1000) < 650:
-                self.end_display = """You’re taken by surprise as gravity suddenly reverses itself.
+                self.end_display = """You're taken by surprise as gravity suddenly reverses itself.
                 In your shock you hit the ceiling as your computer hits it further than you would appreciate.
                 After a bit of moaning and groaning, you figure that the only way down is with the same power that got you up here,
                  and you start to do the most awkward turtle crawly you can towards your computer. Swim my weird turtle thing, swim..
@@ -182,16 +182,16 @@ class NewMember(Event):
 class ForgotPassword(Event):
     def __init__(self):
         super().__init__("""As you rouse your computer from its deep slumber, it presents you with a familiar screen:
-            a red background, with some text informing you that your device is locked. You move your cursor over the familiar dialogue box, andï¿½""", "", [Option([GOOD], "Success")], 5)
+            a red background, with some text informing you that your device is locked. You move your cursor over the familiar dialogue box, and'""", "", [Option([GOOD], "Success")], 5)
 
     def run(self, game, player):
         if self.option_picked == 0:
             self.end_display = """You log in...Moving on to more important things"""
             #break
         else:
-            self.end_display = """Your computer thinks for a moment then responds with a large ï¿½Password Incorrectï¿½ message.
-            Huh? Thatï¿½s odd, you know your own password, and youï¿½ve used the same one since high schoolï¿½
-            You should probably have changed it since then but you know, Iï¿½m sorry, knew your password.
+            self.end_display = """Your computer thinks for a moment then responds with a large 'Password Incorrect' message.
+            Huh? That's odd, you know your own password, and you've used the same one since high school'
+            You should probably have changed it since then but you know, I'm sorry, knew your password.
             Well not much left to do but start guessing."""
             self.dtime = -15
             # TODO repeat request for password
