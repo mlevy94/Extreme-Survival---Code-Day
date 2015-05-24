@@ -45,3 +45,39 @@ You hear some people talking in the hallway nearby before they enter the room yo
 	(Recommend a nature documentary) recommend a nice relaxing nature documentary, something that you could put on and work to, where no one will get distracted by it. Respecting your wishes because it’s your room, they put on a nature documentary. As the movie progresses you find it becoming more and more difficult to keep your eyes open, and eventually nod off for the duration of the film.
 	(Put on an okay movie) recommend a movie that you’ve all seen before. One that you know you can ignore and continue working through. They reluctantly agree, as a movie that no one really likes is put on, motivating everyone to work harder rather than pay attention. Good going, kill joy.
 	(Out on an Action Movie) recommend putting on an action movie, something good to watch. Your friends whole heartedly agree. You try to keep working, but fail miserably at that. You get caught up in the movie too, even though the plotline is poorly thought out. The movie’s over and you’ve done nothing productive the whole time. You even spend some extra time chatting with your friends. Work is boring after all.
+
+New Code Snippet Needed
+As you work you run into an issue, but you don’t have any code to fix the issue. You think it might be a minor issue, but you’re not certain.  You…
+	(Ignore) ignore it. After coding for a while longer however, you discover that it was in fact an important piece of code. You have to write it anyways, killing time fixing all the bugs that the new code caused.
+(work on it) start trying to fix it. It goes… [random chance]
+	(well) rather well, you’re proud of your work. But it’s not done quite yet… [random chance]
+		(discovered API) In your efforts to create the code, you discovered an API that does exactly what you needed it too, for this and the next bit too! Great job, now you don’t have to worry about the next segment of code.
+		(made it) [random chance]
+			(works) … And now you are.
+			(old code works) Wait what was that? Is that what you think it was? Yes, it is! Some of your old broken code has begun to work again, you’re not sure why but this code has revived that code and that’s all you want to know.
+	(poorly) rather poorly, you’re not proud but you have to try and salvage this as much as you can, you… [random chance]
+		(char*)  forgot to null terminate a char* in C. You are now reading garbage.
+		(Forgot to save) pressed it. You can’t believe you just pressed it. All this hard work and you pressed not only “close” but “don’t save” as well. It was at that exact moment that you remembered, you never once saved the code. With little else left to do, you start all over again.
+
+New Member
+As your working one of your teammates introduces to a potential new member to your team. They think they might be able to help. Do you let them?
+	(No) No you don’t let them. They leave slightly disappointed.
+	(Yes) Sure why not, you take a risk on them. What’s the worst that could happen? [random event]
+		(helpful) As it turns out not much, they’re rather quite helpful. In fact, you would even venture to say that… [RC]
+			(Nice) they know their stuff, and they can even help you.
+			(Genius) That they border on genius level, solving issues you didn’t even know you had yet.
+		(Sucks) This that’s the worst that could happen, not only is he not especially helpful but he’s… [rc]
+			(Hurts) Making things worse, he’s breaking old code and making seemingly random changes to your perfectly good project. How rude.
+			(Murderer) got an odd vibe about him. Constantly changing things and always keeping his eyes shifting towards the exit. After a bit of his rampage through your progress, he goes on a bathroom break and… [rc]
+				(done) you never see hide nor tail of him again.
+				(police) he’s nowhere to be found. You don’t especially care that he’s gone missing, you like it a bit in fact. You like it up until the police show up asking about him. As it turns out he was wanted for murder. The police seize your computer as evidence against him. After a quick check your entire team is still accounted for. You knew something was wrong with that guy.
+
+Server Issues
+You start to prepare yourself for the big part, setting up the server. You quickly practice some zen meditation before allowing yourself the agony of trying to create the most okayest server you can in 24 hours. You…
+	(compile the server) try to do it yourself… [rc]
+		(Works) and it didn’t even make weird noises, nice going!
+		(Sort of works) and you could call it a server, it does work after all.
+		(fails) and you can’t figure out what you’re doing, you can’ find anything you’re looking for, and nothing seems to make sense, you think you should just go look it up online. [go to online search random chance]
+	(Try looking online for it) head over to google, this problem isn’t unique to you and most likely someone make a tutorial for it somewhere.
+		(Found it) You find it with some swift googling and get things rolling smoothly again.
+		(Wrong OS) You find a server and set it up. When you go to test it however, you discover that you built it for the wrong operating system. Google can’t help you now, only thing you can do is hunker down and try to fix it yourself. [go to compile server random chance]
