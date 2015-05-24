@@ -30,6 +30,7 @@ class Client():
 
 
   def _read(self):
+    # TODO add signal so this doesn't keep reading when client disconnects
     self.readSock = True
     while self.readSock:
       data = self.socket.recv(4096)
