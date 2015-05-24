@@ -1,3 +1,4 @@
+from concurrent.futures import ThreadPoolExecutor
 import time as sys_time
 from server.error import Error
 
@@ -22,9 +23,12 @@ class Game:
                 player.client_print("Good game!")
                 player.client.close()
         else:
-            for player in self.players:
-                player.turn(self)
-            self.time += self.rate
+            def player_turn(player):
+                return player.turn().drate
+            with ThreadPoolExecutor(len(self.players)) as executor:
+                for result in executor.map(player_turn, self.players):
+                    self.rate /= result
+
 
 
     def add_player(self, player):

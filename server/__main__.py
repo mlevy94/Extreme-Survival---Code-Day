@@ -1,5 +1,4 @@
 import time
-from server.game import Game
 from server.player import *
 from server.servercode import Server
 

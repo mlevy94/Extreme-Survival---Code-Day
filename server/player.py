@@ -12,6 +12,7 @@ class Player:
         self.client = client
         self.type = type
         self.events = [AntigravityEvent(), TiredEvent(), NewCodeNeeded(), NewMember(), ForgotPassword(), Shaking()]
+        self.drate = 0
 
     def present(self, options):
         for option in options:
@@ -21,11 +22,12 @@ class Player:
     def client_prompt(self, prompt, options = None, timeout = 5 * 60):
         return Game.client_prompt(self.client, prompt, options, timeout)
 
-    def turn(self, game):
+    def turn(self):
         for event in self.events:
             if random.randrange(100) < event.prob:
-                event.get_input(Game.INSTANCE, self)
+                event.get_input(self)
             event.prob += 1
+        return self
 
     def client_print(self, to_print):
         Game.client_print(self.client, to_print)

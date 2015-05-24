@@ -45,35 +45,35 @@ class Event:
         self.drate = drate
         self.player_type = player_type
 
-    def present(self, game, player):
+    def present(self, player):
         # Use the option_picked in run to do specific things
         if self.check(player):
             str = player.present(list(map(lambda option: option.str, self.options)))
-            self.option_picked(str, game, player)
+            self.option_picked(str, player)
 
-    def get_input(self, game, player):
+    def get_input(self, player):
         if self.check(player):
             player.client_print(self.display)
             response = player.client_prompt("Enter a response to event")
             if response != Error.READING:
-                self.option_picked(response, game, player)
+                self.option_picked(response, player)
             else:
                 print(Error.READING)
 
 
-    def option_picked(self, str, game, player):
+    def option_picked(self, str, player):
         for option in self.options:
             if option.check(str):
                 self.option_index = self.options.index(option)
             if self.option_index == -1:
-                self.present(game, player)
+                self.present(player)
             else:
-                self.run(game, player)
+                self.run(player)
 
-    def run(self, game, player):
+    def run(self, player):
         # Subclasses should extend this for specific functionality
         self.prob = self.base_prob
-        game.rate /= self.drate
+        player.drate = self.drate
 
     def check(self, player):
         # Subclass for specifics
@@ -88,7 +88,7 @@ class AntigravityEvent(Event):
         Bored and at wits end, you decide that you deserve a little break. You type with a renewed vigor, placing in 'input antigravity.
         A loud humming fills the room, as you suddenly feel like your falling' up?""", "", [Option([GET, COMPUTERS], "Grab your computer"), Option([NOTHING], "Do nothing")])
 
-    def run(self, game, player):
+    def run(self, player):
         if self.option_picked == 0:
             self.end_display = """You grab your computer as you start to slowly float away towards the ceiling.
             You just float on, it's alright already, because you'll just float on the ceiling.
@@ -109,14 +109,14 @@ class AntigravityEvent(Event):
                 Well then, your computer is on the ceiling and your still on the floor.
                 What now smart guy? Your productivity has been fourthed"""
                 self.drate = 1/4
-        super().run(game, player)
+        super().run(player)
 
 class TiredEvent(Event):
     def __init__(self):
         super().__init__("""As you work you begin to feel your mind lagging behind your fingers. A yawn escapes your lips as you stretch your back.
         The call of sleep enters your mind as you consider stopping to rest your eyes.""", "", [Option([REST], "Take a nap"), Option([NOTHING], "Ignore"), Option([DRINK, ENERGY_DRINK], "Have Energy Drink")], 5)
 
-    def run(self, game, player):
+    def run(self, player):
         if self.option_picked == 0:
             self.end_display = """Giving into your desires you wander off to find a comfortable corner or unused chair to take a nap. Your productivity doubles"""
             self.drate = 2
@@ -129,7 +129,7 @@ class TiredEvent(Event):
             self.end_display = "You are fully charged. Be careful not to overdo the drinks (planned feature)"
             self.drate = 1.5
             # raise bladder probability and increrase health problems.
-        super().run(game, player)
+        super().run(player)
 
 
 class NewCodeNeeded(Event):
@@ -138,7 +138,7 @@ class NewCodeNeeded(Event):
         the issue. You think it might be a
         minor issue, but you're not certain.  You:""", [Option([WORK], "Work on it"), Option([NOTHING], "Ignore"), Option([SEARCH], "Find Code Online")], 5)
 
-    def run(self, game, player):
+    def run(self, player):
         if self.option_picked == 0:
             if random.uniform(0, 1000) < 700:
                 self.end_display = """The Code Works. Your productivity increases"""
@@ -152,13 +152,13 @@ class NewCodeNeeded(Event):
             that it was in fact an important piece of code. You have to write it anyways,
             killing time fixing all the bugs that the new code caused. Your productivity is a third of what it was""")
             self.drate = 1/1.5
-        super().run(game, player)
+        super().run(player)
 
 class NewMember(Event):
     def __init__(self):
         super().__init__("Another Member wishes to join your team", "", [Option([YES], "Accept"), Option([NO], "Reject")], 5)
 
-    def run(self, game, player):
+    def run(self, player):
         if self.option_picked == 0:
             if random.uniform(0, 10) < 3:
                 self.end_display = """The new member is a genius. He/She saves quadruples your productivity"""
@@ -172,14 +172,14 @@ class NewMember(Event):
         else:
             self.end_display = "He joins another team. You continued with your work."
             self.drate = 1
-        super().run(game, player)
+        super().run(player)
 
 class ForgotPassword(Event):
     def __init__(self):
         super().__init__("""As you rouse your computer from its deep slumber, it presents you with a familiar screen:
             a red background, with some text informing you that your device is locked. You move your cursor over the familiar dialogue box, and'""", "", [Option([GOOD], "Success")], 5)
 
-    def run(self, game, player):
+    def run(self, player):
         if self.option_picked == 0:
             self.end_display = """You log in...Moving on to more important things"""
             #break
@@ -190,13 +190,13 @@ class ForgotPassword(Event):
             Well not much left to do but start guessing."""
             self.drate = 1/1.25
             # TODO repeat request for password
-        super().run(game, player)
+        super().run(player)
 
 class Shaking(Event):
     def __init__(self):
         super().__init__("""You feel a slight tremor""", "", [Option([NOTHING], "Ignore"), Option([INVESTIGATE], "Investigate"), Option([HIDE], "Hide")], 5)
 
-    def run(self, game, player):
+    def run(self, player):
         if self.option_picked == 0:
             if random.uniform(1,1000)< 400:
                 def __init__(self):
@@ -219,4 +219,4 @@ class Shaking(Event):
                 self.drate = 1/1.5
             else:
                 self.end_display = """Your preparedness for the earthquake saved you valuable time. Continue to code"""
-        super().run(game, player)
+        super().run(player)
