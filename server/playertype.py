@@ -23,4 +23,4 @@ class PlayerType(Enum):
 
     @staticmethod
     def get_types_str():
-        ['normal', 'frontend', 'backend', 'designer']
+        return ['normal', 'frontend', 'backend', 'designer']

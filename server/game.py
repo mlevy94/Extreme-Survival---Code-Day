@@ -3,9 +3,12 @@ from server.error import Error
 
 __author__ = 'Wes'
 class Game:
+    INSTANCE = None
+
     def __init__(self, players, time=1440):
         self.players = players
         self.time = time
+        self.INSTANCE = self
 
     def advance(self, amount):
         self.time += amount

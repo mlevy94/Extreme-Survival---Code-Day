@@ -1,4 +1,5 @@
 import random
+from server.error import Error
 from server.playertype import PlayerType
 
 __author__ = 'Wes'
@@ -53,7 +54,11 @@ class Event:
     def get_input(self, game, player):
         if self.check(player):
             player.client_print(self.display)
-            self.option_picked(player.client_prompt("Enter a response to event"), game, player)
+            response = player.client_prompt("Enter a response to event")
+            if response != Error.READING:
+                self.option_picked(response, game, player)
+            else:
+                print(Error.READING)
 
 
     def option_picked(self, str, game, player):

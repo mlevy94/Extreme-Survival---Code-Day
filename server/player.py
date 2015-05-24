@@ -17,9 +17,8 @@ class Player:
         self.name = name
         self.client = client
         self.type = type
-        if type == PlayerType.NORMAL:
-            self.events = NORMAL
-        elif type == PlayerType.FRONTEND:
+        self.events = NORMAL
+        if type == PlayerType.FRONTEND:
             self.events = FRONTEND
         elif type == PlayerType.BACKEND:
             self.events = BACKEND
@@ -37,8 +36,8 @@ class Player:
     def turn(self, game):
         for event in self.events:
             if random.randrange(100) < event.prob:
-                event.get_input(self)
+                event.get_input(Game.INSTANCE, self)
 
     def client_print(self, to_print):
         self.client.write(to_print)
-        print("Sent this to",  self.name, "(" + self.client + ")" + ":", to_print)
+        print("Sent this to",  self.name, ":", to_print)

@@ -70,7 +70,6 @@ class Client(QObject):
       pass # no one connected to this signal
 
   def close(self):
-    self.socket.shutdown(socket.SHUT_RDWR)
     self.socket.close()
     self._close()
 
