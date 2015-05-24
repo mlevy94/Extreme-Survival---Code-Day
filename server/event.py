@@ -48,7 +48,7 @@ class Event:
     def present(self, game, player):
         # Use the option_picked in run to do specific things
         if self.check(player):
-            str = player.present(map(lambda option: option.str, self.options))
+            str = player.present(list(map(lambda option: option.str, self.options)))
             self.option_picked(str, game, player)
 
     def get_input(self, game, player):
