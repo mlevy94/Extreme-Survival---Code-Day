@@ -1,4 +1,4 @@
-from server.event import AntigravityEvent
+from server.event import *
 from server.game import Game
 from server.playertype import PlayerType
 
@@ -6,24 +6,12 @@ __author__ = 'Wes'
 
 import random
 
-NORMAL = [AntigravityEvent()]
-FRONTEND = []
-BACKEND = []
-DESIGNER = []
-MASTER = NORMAL + FRONTEND + BACKEND + DESIGNER
-
 class Player:
     def __init__(self, name, client, type=PlayerType.NORMAL):
         self.name = name
         self.client = client
         self.type = type
-        self.events = NORMAL
-        if type == PlayerType.FRONTEND:
-            self.events = FRONTEND
-        elif type == PlayerType.BACKEND:
-            self.events = BACKEND
-        elif type == PlayerType.DESIGNER:
-            self.events = DESIGNER
+        self.events = [AntigravityEvent(), TiredEvent(), NewCodeNeeded(), NewMember(), ForgotPassword(), Shaking()]
 
     def present(self, options):
         for option in options:
@@ -37,6 +25,7 @@ class Player:
         for event in self.events:
             if random.randrange(100) < event.prob:
                 event.get_input(Game.INSTANCE, self)
+            event.prob += 1
 
     def client_print(self, to_print):
         self.client.write(to_print)
