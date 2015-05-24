@@ -28,5 +28,5 @@ class Player:
             event.prob += 1
 
     def client_print(self, to_print):
-        self.client.write(to_print)
+        Game.client_print(self.client, to_print)
         print("Sent this to",  self.name, ":", to_print)

@@ -19,14 +19,14 @@ def input_type(client):
       actual_type = PlayerType.from_string(str_type)
   else:
       print(Error.READING)
-
   if actual_type == PlayerType.INVALID:
       client.write('Your input was invalid, try again')
       input_type(client)
 
+
 def client_connect(client):
   print('Client Connected, making player')
-  client.write('We are now going to begin making a player')
+  Game.client_print(client, 'We are now going to begin making a player')
   name = GAME.client_prompt(client, "Input your username")
   if name == Error.READING:
       print(Error.READING)

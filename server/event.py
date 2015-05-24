@@ -74,7 +74,6 @@ class Event:
         # Subclasses should extend this for specific functionality
         self.prob = self.base_prob
         game.rate /= self.drate
-        player.present()
 
     def check(self, player):
         # Subclass for specifics
