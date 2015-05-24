@@ -1,4 +1,5 @@
 from server.event import AntigravityEvent
+from server.game import Game
 from server.playertype import PlayerType
 
 __author__ = 'Wes'
@@ -28,11 +29,10 @@ class Player:
     def present(self, options):
         for option in options:
             self.print("*" + option)
-        self.prompt("Those are your options, please select one")
+        return options[self.prompt("Those are your options, please select one (1 to " + str(len(options)) + ")") - 1]
 
-    def prompt(self, prompt):
-        self.print(prompt)
-        # TODO setup prompting message on client
+    def prompt(self, prompt, options = None, timeout = 5 * 60):
+        return Game.prompt(self.client, prompt, options, timeout)
 
     def turn(self, game):
         for event in self.events:
@@ -40,5 +40,5 @@ class Player:
                 event.get_input(self)
 
     def print(self, to_print):
-        # TODO send a message to the client to print the message
+        self.client.write("print('" + to_print + "')")
         print("Sent this to",  self.name, "(" + self.client + ")" + ":", to_print)

@@ -1,3 +1,4 @@
+from server.error import Error
 from server.game import Game
 from server.player import *
 from server.servercode import Server
@@ -9,24 +10,22 @@ if __name__ == "__main__":
     SERVER = Server()
 
     def client_connect(client):
-        client.write("prompt('Input your username')")
-        name = ''
-        while name == '':
-            name = client.read()
+        name = GAME.prompt(client, "Input your username")
+        if name == Error.READING:
+            print(Error.READING)
+            name = "user"
 
         def input_type():
-            client.write("prompt('Input your player type, here are your options')")
-
+            options = ''
             for type_str in PlayerType.types:
-                client.write("print(* " + type_str + ")")
+                options += '\n* ' + type_str
 
-            type = ''
-            while type == '':
-                type = client.read()
+            GAME.prompt(client, "Input your player type, here are your options", options)
 
             actual_type = PlayerType.from_string(type)
 
             if actual_type == PlayerType.INVALID:
+                client.write("print('Your input was invalid, try again')")
                 input_type()
 
         GAME.add_player(Player(name, client, input_type()))
