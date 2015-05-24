@@ -13,7 +13,7 @@ DESIGNER = []
 MASTER = NORMAL + FRONTEND + BACKEND + DESIGNER
 
 class Player:
-    def __init__(self, name, client, type = PlayerType.NORMAL):
+    def __init__(self, name, client, type=PlayerType.NORMAL):
         self.name = name
         self.client = client
         self.type = type
@@ -28,17 +28,17 @@ class Player:
 
     def present(self, options):
         for option in options:
-            self.print("*" + option)
-        return options[self.prompt("Those are your options, please select one (1 to " + str(len(options)) + ")") - 1]
+            self.client_print("*" + option)
+        return options[self.client_prompt("Those are your options, please select one (1 to " + str(len(options)) + ")") - 1]
 
-    def prompt(self, prompt, options = None, timeout = 5 * 60):
-        return Game.prompt(self.client, prompt, options, timeout)
+    def client_prompt(self, prompt, options = None, timeout = 5 * 60):
+        return Game.client_prompt(self.client, prompt, options, timeout)
 
     def turn(self, game):
         for event in self.events:
             if random.randrange(100) < event.prob:
                 event.get_input(self)
 
-    def print(self, to_print):
-        self.client.write("print('" + to_print + "')")
+    def client_print(self, to_print):
+        self.client.write(to_print)
         print("Sent this to",  self.name, "(" + self.client + ")" + ":", to_print)

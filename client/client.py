@@ -8,8 +8,8 @@ import threading
 if __name__ == "__main__":
   print("Welcome to Extreme Survival - Code Day")
   print("Please enter the IP of the server you wish to connect to.")
-  port = 5000
   address = input()
+  port = int(input("Port to connect to\n"))
   cliSock = socket.socket()
   cliSock.settimeout(1)
   connected = False

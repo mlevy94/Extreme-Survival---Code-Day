@@ -13,7 +13,7 @@ from server.client import Client
 class Server(QObject):
 
     address = None
-    port = 5000
+    port = int(input("Enter the port to use: "))
 
     newCliSig = signal(int)
 

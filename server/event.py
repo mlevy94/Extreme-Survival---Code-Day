@@ -35,7 +35,7 @@ class Option:
 class Event:
     base_prob = 0
 
-    def __init__(self, display, end_display, options, player_type = PlayerType.NORMAL, dtime = 0):
+    def __init__(self, display, end_display, options, player_type=PlayerType.NORMAL, dtime=0):
         self.end_display = end_display
         self.display = display
         self.option_index = -1
@@ -52,8 +52,8 @@ class Event:
 
     def get_input(self, game, player):
         if self.check(player):
-            player.print(self.display)
-            self.option_picked(player.prompt("Enter a response to event"), game, player)
+            player.client_print(self.display)
+            self.option_picked(player.client_prompt("Enter a response to event"), game, player)
 
 
     def option_picked(self, str, game, player):

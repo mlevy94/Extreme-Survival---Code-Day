@@ -3,7 +3,7 @@ from server.error import Error
 
 __author__ = 'Wes'
 class Game:
-    def __init__(self, players, time = 1440):
+    def __init__(self, players, time=1440):
         self.players = players
         self.time = time
 
@@ -18,11 +18,11 @@ class Game:
         self.players.append(player)
 
     @staticmethod
-    def prompt(client, prompt, options = None, timeout = 5 * 60):
-        client.write("prompt('" + prompt + "')")
+    def client_prompt(client, prompt, options=None, timeout=5 * 60):
+        client.write(prompt)
 
         if options is not None:
-            client.write("print('" + options + "')")
+            client.write(options)
 
         start_time = sys_time.time()
         output = ''
