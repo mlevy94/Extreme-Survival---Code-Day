@@ -17,7 +17,7 @@ class Player:
     def present(self, options):
         for option in options:
             self.client_print("*" + option)
-        return options[self.client_prompt("Those are your options, please select one (1 to " + str(len(options)) + ")") - 1]
+        return self.client_prompt("Select an option")
 
     def client_prompt(self, prompt, options = None, timeout = 5 * 60):
         return Game.client_prompt(self.client, prompt, options, timeout)
