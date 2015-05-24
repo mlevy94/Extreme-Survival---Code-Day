@@ -208,10 +208,10 @@ class Shaking(Event):
                 self.end_display = """It was the constuction work, continue to code."""
         elif self.option_picked == 1:
             if random.uniform(1,1000)< 400:
-                self.end_display = None # TODO insert Scenario
+                self.end_display = """Didn't Steve warn you of the construction work and not to snoop around? Injured in the arm, lose productivity""" # TODO insert Scenario
                 self.drate = 1/1.5
             else:
-                self.end_display = None # TODO insert scenario
+                self.end_display = """You step out of the building to find an elephant running wild on campus. You call 911 and then proceed to continue work""" # TODO insert scenario
         else:
             if random.uniform(1,1000)< 400:
                 self.end_display = """Wasted half hour hiding from the sound of the construction work.
