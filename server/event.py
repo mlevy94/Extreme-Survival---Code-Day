@@ -4,7 +4,14 @@ __author__ = 'Wes'
 
 COMPUTERS = ['computer', 'laptop', 'desktop']
 GET = ['get', 'grab']
-NOTHING = ['sit', 'do nothing', 'no action']
+NOTHING = ['sit', 'do nothing', 'no action', 'ignore']
+WORK = ['work', 'code', 'design']
+YES = ['yes', 'accept', 'y']
+NO = ['no', 'reject', 'n']
+REST = ['nap', 'rest', 'sleep']
+DRINK = ['drink']
+ENERGY_DRINK = ['energy', 'redbull', 'red bull', 'monster', 'coffee']
+SEARCH = ['search', 'download', 'google', 'online', 'find API']
 
 class Option:
 
@@ -80,14 +87,14 @@ class AntigravityEvent(Event):
         super().run(game, player)
 
 class TiredEvent(Event):
-   def __init__(self):
+    def __init__(self):
         super().__init__("Feeling Tired", "", [Option([REST], "Rest"), Option([NOTHING], "Ignore"), Option([ENERGY, DRINK, REDBULL, COFFEE], "Have Energy Drink")], 5)
 
     def run(self, game, player):
         if self.option_picked == 0:
             self.end_display = """You are no longer tired. The sleep cost you 1 hour of coding time"""
             self.dtime = -60
-        else if:
+        elif self.option_picked == 1:
             self.end_display = """You choose to work on in the tired state.
             This has its consequences"""
             self.dtime = 0
@@ -99,14 +106,14 @@ class TiredEvent(Event):
         super().run(game, player)
 
 class TiredEvent(Event):
-   def __init__(self):
-        super().__init__("Feeling Tired", "", [Option([REST, NAP], "Rest"), Option([NOTHING, IGNORE], "Ignore"), Option([ENERGY, DRINK, REDBULL, COFFEE], "Have Energy Drink")], 5)
+    def __init__(self):
+        super().__init__("Feeling Tired", "", [Option([REST], "Rest"), Option([NOTHING], "Ignore"), Option([DRINK, ENERGY_DRINK], "Have Energy Drink")], 5)
 
     def run(self, game, player):
         if self.option_picked == 0:
             self.end_display = """You are no longer tired. The sleep cost you 1 hour of coding time"""
             self.dtime = -60
-        else if self.option_picked == 1:
+        elif self.option_picked == 1:
             self.end_display = """You choose to work on in the tired state.
             This has its consequences"""
             self.dtime = 0
@@ -118,8 +125,8 @@ class TiredEvent(Event):
         super().run(game, player)
 
 class NewCodeNeeded(Event):
-   def __init__(self):
-        super().__init__("New Code Snippet Needed", "", [Option([Work, Code], "Work on it"), Option([NOTHING,IGNORE], "Ignore"), Option([DOWNLOAD, SEARCH, ONLINE, FIND], "Find Code Online")], 5)
+    def __init__(self):
+        super().__init__("New Code Snippet Needed", "", [Option([WORK], "Work on it"), Option([NOTHING], "Ignore"), Option([SEARCH], "Find Code Online")], 5)
 
     def run(self, game, player):
         if self.option_picked == 0:
@@ -130,7 +137,7 @@ class NewCodeNeeded(Event):
             self.end_display = """There are bugs. They took time to fix
             You lost an Hour"""
             self.dtime = -60
-        else ifself.option_picked == 1:
+        elif self.option_picked == 1:
             self.end_display = """Work grings to a halt for two hours due to lack of API's"""
             self.dtime = -120
             # Redirect to next option soon
@@ -142,9 +149,9 @@ class NewCodeNeeded(Event):
             self.end_display = "File filled with viruses. All data Corrupted. Must start over."
         super().run(game, player)
 
- class NewMember(Event):
-   def __init__(self):
-        super().__init__("Another Member wishes to join your team", "", [Option([ACCEPT, YES, Y, OK], "Accept"), Option([REJECT, NO, N], "Reject"), 5)
+class NewMember(Event):
+    def __init__(self):
+        super().__init__("Another Member wishes to join your team", "", [Option([YES], "Accept"), Option([NO], "Reject")], 5)
 
     def run(self, game, player):
         if self.option_picked == 0:
