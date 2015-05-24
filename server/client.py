@@ -40,7 +40,6 @@ class Client(QObject):
       except socket.timeout:
         pass
       except socket.error:
-        print("quitting")
         self._close()
         break
       else:

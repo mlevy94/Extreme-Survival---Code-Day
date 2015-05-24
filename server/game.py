@@ -27,13 +27,12 @@ class Game:
         if options is not None:
             client.write(options)
 
-        start_time = sys_time.time()
+        timeout_time = sys_time.time() + timeout
         output = ''
         while output == '':
-            if start_time + timeout > sys_time.time():
+            if timeout_time < sys_time.time():
                 break
             output = client.read()
-
         if output == '':
             client.close()
             return Error.READING
