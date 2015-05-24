@@ -79,25 +79,42 @@ class AntigravityEvent(Event):
     base_prob = 5
 
     def __init__(self):
-        super().__init__("You have imported antigravity!", "", [Option([GET, COMPUTERS], "Grab your computer"), Option([NOTHING], "Do nothing")])
+        super().__init__("""Type type type, click click click. The keys pound down on the keyboard as you slowly whittle away the hours masterfully crafting code.
+        Then into your mind pops a rumor you heard once, that if you told the interpreter to input antigravity that you would be taken to a comic site.
+        Bored and at wits end, you decide that you deserve a little break. You type with a renewed vigor, placing in “input antigravity”.
+        A loud humming fills the room, as you suddenly feel like your falling… up?""", "", [Option([GET, COMPUTERS], "Grab your computer"), Option([NOTHING], "Do nothing")])
 
     def run(self, game, player):
         if self.option_picked == 0:
-            self.end_display = """You grabbed your computer and are now working on the ceiling.
+            self.end_display = """You grab your computer as you start to slowly float away towards the ceiling.
+            You just float on, it’s alright already, because you’ll just float on the ceiling.
+            A change of perspective is all you needed, enjoy your time up here.
             Your productivity has increased. You gain 1 hour"""
             self.dtime = 60
         else:
-            self.end_display = "You lost your computer. You spend 2 hours trying to get it back"
-            self.dtime = -120
+            if random.uniform(1,1000) < 650:
+                self.end_display = """You’re taken by surprise as gravity suddenly reverses itself.
+                In your shock you hit the ceiling as your computer hits it further than you would appreciate.
+                After a bit of moaning and groaning, you figure that the only way down is with the same power that got you up here,
+                 and you start to do the most awkward turtle crawly you can towards your computer. Swim my weird turtle thing, swim..
+                 You spend 1 hour trying to get it back"""
+                self.dtime = -60
+            else:
+                self.end_display = """No not you, your stuff. You watch as your computer finishes interpreting
+                the code and begins to fly up, up, and away from you.
+                Well then, your computer is on the ceiling and your still on the floor.
+                What now smart guy?"""
+                self.dtime = -120
         super().run(game, player)
 
 class TiredEvent(Event):
     def __init__(self):
-        super().__init__("Feeling Tired", "", [Option([REST], "Rest"), Option([NOTHING], "Ignore"), Option([DRINK, ENERGY_DRINK], "Have Energy Drink")], 5)
+        super().__init__("""As you work you begin to feel your mind lagging behind your fingers. A yawn escapes your lips as you stretch your back.
+        The call of sleep enters your mind as you consider stopping to rest your eyes.""", "", [Option([REST], "Take a nap"), Option([NOTHING], "Ignore"), Option([DRINK, ENERGY_DRINK], "Have Energy Drink")], 5)
 
     def run(self, game, player):
         if self.option_picked == 0:
-            self.end_display = """You are no longer tired. The sleep cost you 1 hour of coding time"""
+            self.end_display = """Giving into your desires you wander off to find a comfortable corner or unused chair to take a nap. The sleep cost you 1 hour of coding time"""
             self.dtime = -60
         elif self.option_picked == 1:
             self.end_display = """You choose to work on in the tired state.
