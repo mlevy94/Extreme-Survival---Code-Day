@@ -1,0 +1,47 @@
+Forgot your password
+As you rouse your computer from its deep slumber, it presents you with a familiar screen: a red background, with some text informing you that your device is locked. You move your cursor over the familiar dialogue box, and…  [random chance]
+	(Success) type in your password, moving on to more important things.
+	(Failure) type in your password. Your computer thinks for a moment then responds with a large “Password Incorrect” message. Huh? That’s odd, you know your own password, and you’ve used the same one since high school… You should probably have changed it since then but you know, I’m sorry, knew your password. Well not much left to do but start guessing.
+
+Tired
+As you work you begin to feel your mind lagging behind your fingers. A yawn escapes your lips as you stretch your back. The call of sleep enters your mind as you consider stopping to rest your eyes.
+	(Take a nap) Giving into your desires you wander off to find a comfortable corner or unused chair to take a nap. [Resolved]
+	(Ignore) Sleep is for the weak, you keep working…
+As the clock keeps ticking, the feeling of weariness grows within you, the sandman is singing his lullabies to you. You…
+	(Sleep) allow him to sing you to sleep, making sure to save your work before allowing the gentle waves of dreamy shores to wash over you. [Resolved]
+	(Ignore) shake it off and keep working. Sleep is for the weak, right?
+Your work has slowed noticeably, and the sandman’s lullabies have turned into harsh commands. You struggle to stay awake as the sandman bombards you with thoughts of dreams and the promise of rest. You…	[random chance]
+	(Crash) succumb to sleep. After a long struggle you’re final defense has fallen and you crash hard. You sleep in your chair as time marches on without you.
+	(2nd wind) suddenly feel a breath of fresh air. For reasons unknown all the tiredness you felt has been supplemented with a sense of purpose. The sandman has been routed by burning swords as your mind sharpens itself against the challenges you face. You knew it, sleep is for the weak.
+
+Need to use the bathroom
+	You’re working quietly when all of a sudden hear a rumbling that breaks your train of thought. After a few moments you deduce that the noise emanated from none other than your own abdomen. You begin to question if you’re hungry, but that train of thought too, is interrupted with a firm feeling in your gut. This was not hunger. This was a bathroom required type of issue. You decided…
+	(Go) that when you got to go, you got to go; as you head off to the nearest restroom. [Resolved]
+	(Don’t go) that you could hold it.
+As time goes own you manage to quell the feeling in your gut, but now it’s back with a vengeance. You…
+	(Go)  decide that you should likely go, and make your way to the bathroom. [Resolved]
+	(Don’t go again) know that you’re stronger than this, and ignore it.
+You manage to keep on keeping on for some time, before the lump in your stomach begins a full uprising. You feel yourself start to violently shake as you make up in your mind the proper course of action. You calmly get up from your seated position, and set off at a dead sprint for the closest bathroom. You. Regret. Everything. [Resolved]
+
+Import Antigravity
+Type type type, click click click. The keys pound down on the keyboard as you slowly whittle away the hours masterfully crafting code. Then into your mind pops a rumor you heard once, that if you told the interpreter to input antigravity that you would be taken to a comic site. Bored and at wits end, you decide that you deserve a little break. You type with a renewed vigor, placing in “input antigravity”. A loud humming fills the room, as you suddenly feel like your falling… up? [random chance]
+	(Take computer up with you) You grab your computer as you start to slowly float away towards the ceiling. You just float on, it’s alright already, because you’ll just float on the ceiling.  A change of perspective is all you needed, enjoy your time up here.
+	(Floats up without computer) You’re taken by surprise as gravity suddenly reverses itself. In your shock you hit the ceiling as your computer hits it further than you would appreciate. After a bit of moaning and groaning, you figure that the only way down is with the same power that got you up here, and you start to do the most awkward turtle crawly you can towards your computer. Swim my weird turtle thing, swim.
+	(Computer goes up without you) No not you, your stuff. You watch as your computer finishes interpreting the code and begins to fly up, up, and away from you. Well then, your computer is on the ceiling and your still on the floor. What now smart guy?
+
+Getting Hungry
+As you work you feel a pit forming in your stomach. Fantasies of food start to play in your head. You’re hungry. You…
+	(Eat) get some grub, you’re hungry after all.
+	(Ignore) ignore it for now.
+Your hunger begins to nag at you, making itself known but not unbearable. You…
+	(Eat) get some food.
+	(Ignore) keep trucking, you can finish this code then get some food.
+Your hunger becomes unbearable, it was a mistake to put it off this long. Hunger taunts you with fabricated smells of tasty treats. [Random Chance]
+	(Hot Pocket Delivery) The smell of pizza weaves through the air, you must be going mad with hunger. No wait, that’s real. You can smell it, no illusionary mirage could replicate this smell; this is the smell of, Hot Pocket! Your teammate ran out to grab some more hot pockets! You find your second wind as you eat to your hot cheesy fill, never having lost a moment of time.
+	(Pass Out) The room begins to spin, you realize now that you shouldn’t have skipped breakfast and lunch since yesterday.  You feel weak, and know that taking a quick nap is all that you need to keep going. You close your eyes.
+
+Movie
+You hear some people talking in the hallway nearby before they enter the room you’re in. They want to put on a movie and want your opinion on what they should put on as you are in the room with the largest screen available. You…
+	(Recommend a nature documentary) recommend a nice relaxing nature documentary, something that you could put on and work to, where no one will get distracted by it. Respecting your wishes because it’s your room, they put on a nature documentary. As the movie progresses you find it becoming more and more difficult to keep your eyes open, and eventually nod off for the duration of the film.
+	(Put on an okay movie) recommend a movie that you’ve all seen before. One that you know you can ignore and continue working through. They reluctantly agree, as a movie that no one really likes is put on, motivating everyone to work harder rather than pay attention. Good going, kill joy.
+	(Out on an Action Movie) recommend putting on an action movie, something good to watch. Your friends whole heartedly agree. You try to keep working, but fail miserably at that. You get caught up in the movie too, even though the plotline is poorly thought out. The movie’s over and you’ve done nothing productive the whole time. You even spend some extra time chatting with your friends. Work is boring after all.
