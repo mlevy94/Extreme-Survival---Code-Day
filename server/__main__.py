@@ -1,6 +1,5 @@
-import PyQt5.QtCore
 import time
-from server.error import Error
+from server.game import Game
 from server.player import *
 from server.servercode import Server
 

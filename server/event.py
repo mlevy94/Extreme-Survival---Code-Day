@@ -36,13 +36,13 @@ class Option:
 class Event:
     base_prob = 0
 
-    def __init__(self, display, end_display, options, player_type=PlayerType.NORMAL, dtime=0):
+    def __init__(self, display, end_display, options, player_type=PlayerType.NORMAL, drate=1):
         self.end_display = end_display
         self.display = display
         self.option_index = -1
         self.options = options
         self.prob = self.base_prob
-        self.dtime = dtime
+        self.drate = drate
         self.player_type = player_type
 
     def present(self, game, player):
@@ -73,7 +73,7 @@ class Event:
     def run(self, game, player):
         # Subclasses should extend this for specific functionality
         self.prob = self.base_prob
-        game.time += self.dtime
+        game.rate /= self.drate
         player.present()
 
     def check(self, player):
@@ -94,22 +94,22 @@ class AntigravityEvent(Event):
             self.end_display = """You grab your computer as you start to slowly float away towards the ceiling.
             You just float on, it's alright already, because you'll just float on the ceiling.
             A change of perspective is all you needed, enjoy your time up here.
-            Your productivity has increased. You gain 1 hour"""
-            self.dtime = 60
+            Your productivity has increased. Your productivity doubles"""
+            self.drate = 2
         else:
             if random.uniform(1,1000) < 650:
                 self.end_display = """You're taken by surprise as gravity suddenly reverses itself.
                 In your shock you hit the ceiling as your computer hits it further than you would appreciate.
                 After a bit of moaning and groaning, you figure that the only way down is with the same power that got you up here,
                  and you start to do the most awkward turtle crawly you can towards your computer. Swim my weird turtle thing, swim..
-                 You spend 1 hour trying to get it back"""
-                self.dtime = -60
+                 Your productivity halves"""
+                self.drate = 1/2
             else:
                 self.end_display = """No not you, your stuff. You watch as your computer finishes interpreting
                 the code and begins to fly up, up, and away from you.
                 Well then, your computer is on the ceiling and your still on the floor.
-                What now smart guy?"""
-                self.dtime = -120
+                What now smart guy? Your productivity has been fourthed"""
+                self.drate = 1/4
         super().run(game, player)
 
 class TiredEvent(Event):
@@ -119,44 +119,40 @@ class TiredEvent(Event):
 
     def run(self, game, player):
         if self.option_picked == 0:
-            self.end_display = """Giving into your desires you wander off to find a comfortable corner or unused chair to take a nap. The sleep cost you 1 hour of coding time"""
-            self.dtime = -60
+            self.end_display = """Giving into your desires you wander off to find a comfortable corner or unused chair to take a nap. Your productivity doubles"""
+            self.drate = 2
         elif self.option_picked == 1:
             self.end_display = """You choose to work on in the tired state.
-            This has its consequences"""
-            self.dtime = 0
+            This has its consequences (planned feature)"""
+            self.drate = 0
             # Redirect to next option soon
         else:
-            self.end_display = "You are fully charged. Be careful not to overdo the drinks"
-            self.dtime = 30
+            self.end_display = "You are fully charged. Be careful not to overdo the drinks (planned feature)"
+            self.drate = 1.5
             # raise bladder probability and increrase health problems.
         super().run(game, player)
 
 
 class NewCodeNeeded(Event):
     def __init__(self):
-        super().__init__("New Code Snippet Needed", "", [Option([WORK], "Work on it"), Option([NOTHING], "Ignore"), Option([SEARCH], "Find Code Online")], 5)
+        super().__init__("""As you work you run into an issue, but you don't have any code to fix
+        the issue. You think it might be a
+        minor issue, but you're not certain.  You:""", [Option([WORK], "Work on it"), Option([NOTHING], "Ignore"), Option([SEARCH], "Find Code Online")], 5)
 
     def run(self, game, player):
         if self.option_picked == 0:
             if random.uniform(0, 1000) < 700:
-                self.end_display = """The Code Works. You save half an hour"""
-                self.dtime = 30
+                self.end_display = """The Code Works. Your productivity increases"""
+                self.drate = 1.5
             else:
                 self.end_display = """There are bugs. They took time to fix
-                You lost an Hour"""
-                self.dtime = -60
-        elif self.option_picked == 1:
-            self.end_display = """Work grings to a halt for two hours due to lack of API's"""
-            self.dtime = -120
-            # Redirect to next option soon
+                Your productivity is halfed"""
+                self.drate = 1/2
         else:
-            if random.uniform(0, 1000) < 960:
-                self.end_display = "You found useful code online. It saves you 2 hours"
-                self.dtime = 120
-            else:
-                self.end_display = "File filled with viruses. All data Corrupted. Must start over."
-                #end game
+            player.client_print("""ignore it. After coding for a while longer however, you discover
+            that it was in fact an important piece of code. You have to write it anyways,
+            killing time fixing all the bugs that the new code caused. Your productivity is a third of what it was""")
+            self.drate = 1/1.5
         super().run(game, player)
 
 class NewMember(Event):
@@ -165,18 +161,18 @@ class NewMember(Event):
 
     def run(self, game, player):
         if self.option_picked == 0:
-            if random.uniform(0, 1000) < 300:
-                self.end_display = """The new member is a genius. He saves two hours"""
-                self.dtime = 120
-            elif random.uniform(0, 1000) < 700:
-                self.end_display = """The new guy is good. One hour is saved"""
-                self.dtime = 60
+            if random.uniform(0, 10) < 3:
+                self.end_display = """The new member is a genius. He/She saves quadruples your productivity"""
+                self.drate = 4
+            elif random.uniform(0, 10) < 7:
+                self.end_display = """The new guy is good. He/She doubles your productivity"""
+                self.drate = 2
             else:
-                self.end_display = """The new guy is distracting. One hour lost"""
-                self.dtime = -60
+                self.end_display = """The new guy is distracting. He/She halves your productivity"""
+                self.drate = 1/2
         else:
             self.end_display = "He joins another team. You continued with your work."
-            self.dtime = 0
+            self.drate = 1
         super().run(game, player)
 
 class ForgotPassword(Event):
@@ -193,7 +189,7 @@ class ForgotPassword(Event):
             Huh? That's odd, you know your own password, and you've used the same one since high school'
             You should probably have changed it since then but you know, I'm sorry, knew your password.
             Well not much left to do but start guessing."""
-            self.dtime = -15
+            self.drate = 1/1.25
             # TODO repeat request for password
         super().run(game, player)
 
@@ -207,24 +203,21 @@ class Shaking(Event):
                 def __init__(self):
                     super().__init__("""A Pterodactyl breaks in through the roof""", "", [Option([NOTHING], "Ignore"), Option([HIDE], "Hide")], 5)
             elif random.uniform(1,1000) < 400:
-                self.end_display = """An earthquake causes the roof to fall. Lose 1 hour finding another location to code"""
-                self.dtime = -60
+                self.end_display = """An earthquake causes the roof to fall. Productivity is halved trying to find new place to code"""
+                self.drate = 2
             else:
                 self.end_display = """It was the constuction work, continue to code."""
         elif self.option_picked == 1:
             if random.uniform(1,1000)< 400:
                 self.end_display = None # TODO insert Scenario
-                self.dtime = -30
+                self.drate = 1/1.5
             else:
                 self.end_display = None # TODO insert scenario
         else:
             if random.uniform(1,1000)< 400:
                 self.end_display = """Wasted half hour hiding from the sound of the construction work.
                 Assured of safety, you continue work"""
-                self.dtime = -30
+                self.drate = 1/1.5
             else:
                 self.end_display = """Your preparedness for the earthquake saved you valuable time. Continue to code"""
-
-
-
         super().run(game, player)

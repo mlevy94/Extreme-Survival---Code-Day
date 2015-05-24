@@ -5,10 +5,11 @@ __author__ = 'Wes'
 class Game:
     INSTANCE = None
 
-    def __init__(self, players, time=1440):
+    def __init__(self, players, time=1440, rate=60):
         self.players = players
         self.time = time
         self.INSTANCE = self
+        self.rate = rate
 
     def advance(self, amount):
         self.time += amount
@@ -16,6 +17,8 @@ class Game:
     def turn(self):
         for player in self.players:
             player.turn(self)
+        self.time += self.rate
+
 
     def add_player(self, player):
         self.players.append(player)
