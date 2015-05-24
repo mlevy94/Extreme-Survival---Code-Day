@@ -123,7 +123,7 @@ class TiredEvent(Event):
         elif self.option_picked == 1:
             self.end_display = """You choose to work on in the tired state.
             This has its consequences (planned feature)"""
-            self.drate = 0
+            self.drate = 1
             # Redirect to next option soon
         else:
             self.end_display = "You are fully charged. Be careful not to overdo the drinks (planned feature)"
