@@ -78,3 +78,87 @@ class AntigravityEvent(Event):
             self.end_display = "You lost your computer. You spend 2 hours trying to get it back"
             self.dtime = -120
         super().run(game, player)
+
+class TiredEvent(Event):
+   def __init__(self):
+        super().__init__("Feeling Tired", "", [Option([REST], "Rest"), Option([NOTHING], "Ignore"), Option([ENERGY, DRINK, REDBULL, COFFEE], "Have Energy Drink")], 5)
+
+    def run(self, game, player):
+        if self.option_picked == 0:
+            self.end_display = """You are no longer tired. The sleep cost you 1 hour of coding time"""
+            self.dtime = -60
+        else if:
+            self.end_display = """You choose to work on in the tired state.
+            This has its consequences"""
+            self.dtime = 0
+            # Redirect to next option soon
+        else:
+            self.end_display = "You are fully charged. Be careful not to overdo the drinks"
+            self.dtime = 30
+            # raise bladder probability and increrase health problems.
+        super().run(game, player)
+
+class TiredEvent(Event):
+   def __init__(self):
+        super().__init__("Feeling Tired", "", [Option([REST, NAP], "Rest"), Option([NOTHING, IGNORE], "Ignore"), Option([ENERGY, DRINK, REDBULL, COFFEE], "Have Energy Drink")], 5)
+
+    def run(self, game, player):
+        if self.option_picked == 0:
+            self.end_display = """You are no longer tired. The sleep cost you 1 hour of coding time"""
+            self.dtime = -60
+        else if self.option_picked == 1:
+            self.end_display = """You choose to work on in the tired state.
+            This has its consequences"""
+            self.dtime = 0
+            # Redirect to next option soon
+        else:
+            self.end_display = "You are fully charged. Be careful not to overdo the drinks"
+            self.dtime = 30
+            # raise bladder probability and increrase health problems.
+        super().run(game, player)
+
+class NewCodeNeeded(Event):
+   def __init__(self):
+        super().__init__("New Code Snippet Needed", "", [Option([Work, Code], "Work on it"), Option([NOTHING,IGNORE], "Ignore"), Option([DOWNLOAD, SEARCH, ONLINE, FIND], "Find Code Online")], 5)
+
+    def run(self, game, player):
+        if self.option_picked == 0:
+            #random option
+            self.end_display = """The Code Works. You save half an hour"""
+            self.dtime = 30
+            #not working
+            self.end_display = """There are bugs. They took time to fix
+            You lost an Hour"""
+            self.dtime = -60
+        else ifself.option_picked == 1:
+            self.end_display = """Work grings to a halt for two hours due to lack of API's"""
+            self.dtime = -120
+            # Redirect to next option soon
+        else:
+            #Random Option
+            self.end_display = "You found useful code online. It saves you 2 hours"
+            self.dtime = 120
+            # small probability
+            self.end_display = "File filled with viruses. All data Corrupted. Must start over."
+        super().run(game, player)
+
+ class NewMember(Event):
+   def __init__(self):
+        super().__init__("Another Member wishes to join your team", "", [Option([ACCEPT, YES, Y, OK], "Accept"), Option([REJECT, NO, N], "Reject"), 5)
+
+    def run(self, game, player):
+        if self.option_picked == 0:
+            #random option
+            self.end_display = """The new member is a genius. He saves two hours"""
+            self.dtime = 120
+            #2
+            self.end_display = """The new guy is good. One hour is saved"""
+            self.dtime = 60
+            #3
+            self.end_display = """The new guy is distracting. One hour lost"""
+            self.dtime = -60
+        else:
+            self.end_display = "He joins another team. You continued with your work." \
+                               ""
+            self.dtime = 0
+        super().run(game, player)
